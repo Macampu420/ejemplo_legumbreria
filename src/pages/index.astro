@@ -1,0 +1,222 @@
+---
+import Layout from "../layouts/Layout.astro";
+import productos from "../../public/MOCK_DATA.json";
+---
+
+<Layout title="Welcome to Astro.">
+  <main>
+    <nav class="navbar navbar-light navbar-expand-lg">
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-bs-toggle="collapse"
+        data-bs-target="#navbarNavAltMarkup"
+        aria-controls="navbarNavAltMarkup"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="flex centerd navbar-brand">
+        <img
+          src="/logo2.jpeg"
+          alt=""
+          width="100"
+          height="100"
+          class="d-inline-block align-text-top"
+        />
+        <p>La granja de los sueños</p>
+      </div>
+
+      <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+        <div class="navbar-nav">
+          <a
+            class="nav-link active"
+            aria-current="page"
+            href="#carouselExampleCaptions">Productos</a
+          >
+          <a class="nav-link active" aria-current="page" href="#contactForm"
+            >Contacto</a
+          >
+        </div>
+      </div>
+    </nav>
+
+    <div class="container mt-5">
+      <!-- carrusel -->
+      <div
+        id="carouselExampleCaptions"
+        class="carousel slide rounded"
+        data-bs-ride="carousel"
+        data-bs-touch="true"
+      >
+        <div class="carousel-indicators">
+          {
+            productos.map((producto, index) => (
+              <button
+                type="button"
+                data-bs-target="#carouselExampleCaptions"
+                data-bs-slide-to={index}
+                class={index === 0 ? "active" : ""}
+                aria-current={index === 0 ? "true" : ""}
+                aria-label={`Slide ${index + 1}`}
+              />
+            ))
+          }
+        </div>
+
+        <div class="carousel-inner">
+          {
+            productos.map((producto, index) => (
+              <div class={`carousel-item ${index === 0 ? "active" : ""}`}>
+                <img
+                  src={producto.urlImagen}
+                  class="carruselImg d-block w-100"
+                  alt={producto.nombre}
+                />
+                <div class="carousel-caption d-none d-md-block">
+                  <h5>{producto.nombre}</h5>
+                  <p>Precio: {producto.precio} COP</p>
+                  <p>{producto.unidadesDisponibles} unidades disponibles</p>
+                </div>
+              </div>
+            ))
+          }
+
+          <button
+            class="carousel-control-prev"
+            type="button"
+            data-bs-target="#carouselExampleCaptions"
+            data-bs-slide="prev"
+          >
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+          </button>
+          <button
+            class="carousel-control-next"
+            type="button"
+            data-bs-target="#carouselExampleCaptions"
+            data-bs-slide="next"
+          >
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- contact form -->
+      <div class="container w-100 p-0">
+        <form class="border p-5 mt-5 rounded" id="contactForm">
+          <h2>¿Te interesa algún producto?</h2>
+          <p>¡No dudes en contactarnos!</p>
+
+          <div class="mb-3">
+            <label for="exampleName" class="form-label">Nombre</label>
+            <input
+              type="text"
+              name="nombre"
+              class="form-control"
+              id="exampleName"
+            />
+          </div>
+          <div class="mb-3">
+            <label for="exampleInputEmail1" class="form-label">Teléfono</label>
+            <input
+              name="telefono"
+              type="number"
+              class="form-control"
+              id="exampleInputEmail1"
+              aria-describedby="emailHelp"
+            />
+            <div id="emailHelp" class="form-text">
+              Nunca compartiremos tu información con nadie mas.
+            </div>
+          </div>
+          <div class="mb-3">
+            <label for="exampleMessage" class="form-label"
+              >Producto de interés</label
+            >
+            <select
+              name="productoSeleccionado"
+              class="form-select"
+              aria-label="Default select example"
+            >
+              <option selected>Open this select menu</option>
+              {
+                productos.map(producto => (
+                  <option value={producto.nombre}>{producto.nombre}</option>
+                ))
+              }
+            </select>
+          </div>
+
+          <button id="botonForulario" type="submit" class="btn btn-primary"
+            >Enviar</button
+          >
+        </form>
+      </div>
+    </div>
+  </main>
+  <style>
+    .navbar img {
+      border-radius: 50%;
+    }
+
+    .navbar {
+      padding: 10px;
+      background-color: #fefec7;
+      display: flex;
+      gap: 12px;
+      justify-content: flex-start;
+    }
+
+    .flex {
+      display: flex;
+      gap: 12px;
+    }
+
+    .centerd {
+      align-items: center;
+    }
+
+    .carousel-inner {
+      max-height: 500px;
+      content: center;
+			user-select: none;
+    }
+
+    .carruselImg {
+      object-fit: fill;
+      max-height: 500px;
+    }
+
+    body {
+      background-color: #fffff6;
+      padding-bottom: 50px;
+    }
+
+    form {
+      background-color: #fff;
+    }
+
+    form button {
+      background-color: #fefec7;
+      border: none;
+      color: #2b2b2b;
+    }
+  </style>
+  <script>
+    const botonForulario = document.getElementById("botonForulario");
+
+    botonForulario?.addEventListener("click", event => {
+      event.preventDefault();
+
+      const contactForm = document.getElementById("contactForm");
+      console.log(contactForm);
+      const formData = new FormData(contactForm as HTMLFormElement);
+      const data = Object.fromEntries(formData.entries());
+      console.log(data);
+    });
+  </script>
+</Layout>

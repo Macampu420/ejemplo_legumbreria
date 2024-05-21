@@ -1,0 +1,32 @@
+[
+  {
+    "nombre": "Tomates",
+    "precio": "$78918.40",
+    "unidadesDisponibles": 30,
+    "urlImagen": "/img/tomate.webp"
+  },
+  {
+    "nombre": "Pepinos",
+    "precio": "$60800.91",
+    "unidadesDisponibles": 52,
+    "urlImagen": "/img/pepino.webp"
+  },
+  {
+    "nombre": "Pimientos",
+    "precio": "$94725.26",
+    "unidadesDisponibles": 47,
+    "urlImagen": "/img/pimiento.webp"
+  },
+  {
+    "nombre": "Zanahorias",
+    "precio": "$92125.26",
+    "unidadesDisponibles": 24,
+    "urlImagen": "/img/zanahoria.webp"
+  },
+  {
+    "nombre": "Pitaya",
+    "precio": "$36765.19",
+    "unidadesDisponibles": 83,
+    "urlImagen": "/img/pitaya.webp"
+  }
+]
